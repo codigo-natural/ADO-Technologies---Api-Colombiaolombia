@@ -1,0 +1,11 @@
+:root {
+  --background: #002060;
+  --text-color-white: #FAFBFC;
+  --text-gray: #FEFEFE;
+  --text-heading-gray: #F4F5F6;
+  --text-color-black: #00000066;
+  --text-primary: #FAFBFC;
+  --color-secondary:  #0076ff;
+  --hover-shadows: 16px 16px 33px #001e64 -16px -16px 33px #002060;
+  --button-border: #6B707C;
+}
