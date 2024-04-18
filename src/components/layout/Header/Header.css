@@ -1,0 +1,15 @@
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--footer-background);
+  width: auto;
+  border-bottom: 1px solid var(--gray-border);
+  height: 4rem;
+  padding: 2em;
+}
+
+.right {
+  display: flex;
+  gap: 12px;
+}
