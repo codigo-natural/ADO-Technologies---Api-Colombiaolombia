@@ -1,12 +1,10 @@
-import { combineReducers } from "redux";
+import { combineReducers } from "@reduxjs/toolkit";
 import authReducer from "./authReducer";
 import { departmentsReducer, resourceReducer, touristicAttractionsReducer } from "./resourceReducer";
 
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
   auth: authReducer,
   resources: resourceReducer,
   departments: departmentsReducer,
-  touristicAttractions: touristicAttractionsReducer,
+  touristicAttractions: touristicAttractionsReducer
 });
-
-export default rootReducer;
