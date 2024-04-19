@@ -9,3 +9,8 @@ nav {
   padding: 2em;
   box-shadow: #fcc;
 }
+
+.right {
+  display: flex;
+  gap: 8px;
+}
