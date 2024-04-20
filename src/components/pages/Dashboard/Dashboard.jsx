@@ -14,9 +14,7 @@ export const Dashboard = () => {
   const [page, setPage] = useState(1)
   const [filterValue, setFilterValue] = useState('')
 
-  console.log('departamentos', departments)
   const { loading, error, resources } = useSelector((state) => state.resources)
-  console.log('resources', resources)
 
 
   useEffect(() => {
