@@ -1,0 +1,65 @@
+.dashboardContainer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.pagination {
+  display: flex;
+  gap: 1em;
+  margin-top: 2em;
+}
+
+details {
+  display: block;
+  width: 300px;
+  margin: 10px 0;
+}
+summary {
+  display: block;
+  background: #99b92c;
+  color: white;
+  border-radius: 5px;
+  padding: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+summary::-webkit-details-marker {
+  color: #ff0000;
+  background: #ffffff;
+}
+
+details[open] summary::-webkit-details-marker {
+  color: #0000ff;
+  background: #00ffff;
+}
+summary::-webkit-details-marker {
+  display: none;
+}
+
+summary:after {
+  content: "+";
+  color: #ffffff;
+  float: left;
+  font-size: 1.5em;
+  font-weight: bold;
+  margin: -5px 5px 0 0;
+  padding: 0;
+  text-align: center;
+  width: 20px;
+}
+
+details[open] summary:after {
+  content: "-";
+  color: #ffffff;
+}
+
+.error-message {
+  color: red;
+  font-weight: bold;
+}
+
+.loading-message {
+  color: blue;
+  font-weight: bold;
+}

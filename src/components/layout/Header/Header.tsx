@@ -12,6 +12,7 @@ export const Header = () => {
         {authUser ? (
           <>
           <Link to="/dashboard">Dashboard</Link>
+          <Link to="/atractions">Atractions</Link>
           <Link to="/profile">Welcome {authUser.username}</Link>
           </>
         ) : (

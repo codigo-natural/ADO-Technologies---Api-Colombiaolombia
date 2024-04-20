@@ -1,25 +1,52 @@
-import { useEffect } from "react"
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from "react-redux"
-// import { ResourceList } from "../../common/ResourceList/ResourceList"
-import { fetchDepartments, fetchResources, fetchTouristicAttractions } from "../../../store/actions/fetchResources"
+import { fetchDepartments, fetchTouristicAttractions, fetchResources, filterDepartments } from "../../../store/actions/fetchResources"
+import { Button } from '../../common/Button/Button'
 import { ErrorBoundary } from '../../common/ErrorBoundary/ErrorBoundary'
+import { Input } from '../../common/Input/Input'
+import { ResourceList } from "../../common/ResourceList/ResourceList"
+import styles from './Dashboard.module.css'
 
 export const Dashboard = () => {
+  const dispatch = useDispatch()
+
   const { departments } = useSelector((state) => state.departments)
+  const [page, setPage] = useState(1)
+  const [filterValue, setFilterValue] = useState('')
+
   console.log('departamentos', departments)
-  const { touristicAttractions } = useSelector((state) => state.touristicAttractions)
-  console.log('touristicAttractions', touristicAttractions)
   const { loading, error, resources } = useSelector((state) => state.resources)
   console.log('resources', resources)
 
-  const dispatch = useDispatch()
 
   useEffect(() => {
-    // dispatch(fetchResources())
+    dispatch(fetchDepartments(page))
     dispatch(fetchTouristicAttractions())
-    dispatch(fetchDepartments())
     dispatch(fetchResources())
-  }, [dispatch])
+  }, [dispatch, page])
+
+  const loadDepartments = (page) => {
+    dispatch(fetchDepartments(page));
+  };
+
+  const filterDepartmentsByName = (name) => {
+    dispatch(filterDepartments(name));
+  };
+
+  const handleFilterChange = (e) => {
+    setFilterValue(e.target.value);
+    if (e.target.value.trim() !== '') {
+      filterDepartmentsByName(e.target.value);
+    } else {
+      dispatch(fetchDepartments(page));
+    }
+  };
+
+  const handlePageChange = (newPage) => {
+    setPage(newPage);
+    loadDepartments(newPage);
+  };
+
 
   if (loading) {
     return <h2>Loading...</h2>
@@ -29,40 +56,54 @@ export const Dashboard = () => {
     return <h2>Error: {error}</h2>
   }
 
-  if (!departments || !touristicAttractions || !resources) {
+  if (!departments || !resources) {
     return <h2>Loading...</h2>;
   }
-  
+
 
   return (
     <ErrorBoundary>
-      <h2>Dashboard</h2>
-
-      <h2>Departments</h2>
-      <div>
-        <p>Name: {departments.name}</p>
-        <p>Description: {departments.description}</p>
-        {/* Mostrar otras propiedades según sea necesario */}
-      </div>
-
-      <h2>Touristic Attractions</h2>
-        <ul>
-          {touristicAttractions.map((attraction) => (
-            <li key={attraction.id}>{attraction.name}</li>
-          ))}
-        </ul>
-
-      <h2>Resources</h2>
-      {Object.keys(resources).length === 0 && <p>No resources found.</p>}
-      {Object.keys(resources).length > 0 && (
+      <div className={styles.dashboardContainer}>
         <div>
-          <p>Name: {resources.name}</p>
-          <p>Description: {resources.description}</p>
-          {/* Mostrar otras propiedades según sea necesario */}
+          <div className={styles.section}>
+            <h2>Departments</h2>
+            <div>
+              <Input
+                type="text"
+                placeholder="Filtrar departamentos"
+                value={filterValue}
+                onChange={handleFilterChange}
+              />
+              <div>
+                {departments?.data?.map((department) => (
+                  <details key={department.id}>
+                    <summary>
+                      {department.name}
+                    </summary>
+                    <p>{department.description}</p>
+                  </details>
+                ))}
+              </div>
+              <div className={styles.pagination}>
+                <Button
+                  onClick={() => handlePageChange(page - 1)}
+                  disabled={page === 1}
+                  text={'Anterior'}
+                >
+                </Button>
+                <Button
+                  text={'Siguiente'}
+                  onClick={() => handlePageChange(page + 1)}
+                ></Button>
+              </div>
+            </div>
+          </div>
         </div>
-      )}
 
-      {/* <ResourceList resources={resources} />  */}  {/* Uncomment if you have a ResourceList component */}
+        <div className={styles.section}>
+          <ResourceList key={resources.id} resources={resources} />
+        </div>
+      </div>
     </ErrorBoundary>
-  )
+  );
 }

@@ -1,0 +1,13 @@
+.list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  list-style: none;
+  gap: 2em;
+}
+.section {
+  width: 60em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2em;
+}
