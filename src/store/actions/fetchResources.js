@@ -17,7 +17,6 @@ export const fetchResources = () => async (dispatch) => {
 
   try {
     const resources = await axios.get(`${apiConfig.baseUrl}/Country/Colombia`);
-    console.log(resources);
     dispatch({ type: FETCH_RESOURCES_SUCCESS, payload: resources.data });
   } catch (error) {
     dispatch({ type: FETCH_RESOURCES_FAILURE, payload: error.message });
@@ -31,7 +30,6 @@ export const fetchDepartments = (page = 1, limit = 10) => async (dispatch) => {
     const departments = await axios.get(
       `${apiConfig.baseUrl}/department/pagedList?page=${page}&pagesize=${limit}`
     );
-    console.log(departments);
     dispatch({ type: FETCH_DEPARTMENTS_SUCCESS, payload: departments.data });
   } catch (error) {
     dispatch({ type: FETCH_DEPARTMENTS_FAILURE, payload: error.message });
@@ -42,8 +40,6 @@ export const filterDepartments = (name) => async (dispatch) => {
   try {
     dispatch({ type: FETCH_DEPARTMENTS_REQUEST })
     const departments = await axios.get(`${apiConfig.baseUrl}/Department/search/${name}`)
-    console.log(departments)
-    // const departments = await axios.get(`${apiConfig.baseUrl}/Department/search/tunja`)
     dispatch({ type: FETCH_DEPARTMENTS_SUCCESS, payload: departments.data })
   } catch (error) {
     dispatch({ type: FETCH_DEPARTMENTS_FAILURE, payload: error.message })
@@ -57,7 +53,6 @@ export const fetchTouristicAttractions = () => async (dispatch) => {
     const touristicAttractions = await axios.get(
       `${apiConfig.baseUrl}/TouristicAttraction`
     );
-    console.log(touristicAttractions.data);
     dispatch({
       type: FETCH_TOURISTICATRACTIONS_SUCCESS,
       payload: touristicAttractions.data,
