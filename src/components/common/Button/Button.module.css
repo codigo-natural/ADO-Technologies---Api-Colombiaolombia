@@ -1,4 +1,4 @@
-button {
+.button {
   --accent: rgb(47, 104, 154);
   font-weight: bold;
   letter-spacing: 0.1em;
@@ -13,12 +13,18 @@ button {
   box-shadow: 13px 13px 10px #001e64, -13px -13px 10px #002060;
 }
 
-button:hover {
+.button:hover {
   box-shadow: var(--hover-shadows);
 }
 
-button:active {
+.button:active {
   box-shadow: var(--hover-shadows), var(--accent) 0px 0px 30px 5px;
   background-color: var(--accent);
   transform: scale(0.95);
+}
+
+.button[disabled] {
+  /* Estilos para el botón cuando está desactivado */
+  opacity: 0.5; /* Ejemplo de estilo: opacidad reducida cuando está desactivado */
+  cursor: not-allowed; /* Ejemplo de estilo: cursor not-allowed cuando está desactivado */
 }

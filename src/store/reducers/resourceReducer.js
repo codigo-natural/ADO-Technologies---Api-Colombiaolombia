@@ -24,7 +24,7 @@ export const resourceReducer = (state = initialState, action) => {
         ...state,
         loading: true,
         error: null,
-        resources: action.payload,
+        // resources: action.payload,
       };
     case FETCH_RESOURCES_SUCCESS:
       return {
